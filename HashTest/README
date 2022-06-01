@@ -1,4 +1,4 @@
-# Project 3: Hashing Test
+# Project 3: Hash Test
 
 * Author: Xavier Caracter
 * Class: CS321 Section 001
@@ -6,39 +6,34 @@
 
 ## Overview
 
-Concisely explain what the program does. If this exceeds a couple of
-sentences, you're going too far. Generally you should be pulling this
-right from the project specification. I don't want you to just cut and
-paste, but paraphrase what is stated in the project specification.
+This hash test application uses the HashTest.java driver class to test two hash tables.  Those hash tables
+being one with liner hashing implemented and the other having doible hashing implemented.  The application 
+then will output the results of the tests and/or will output the hash tables to their respective dumps.
 
 ## Reflection
 
-Write a two paragraph reflection describing your experience with this 
-project.  Talk about what worked well and what was challenging.  
-Did you run into an issue that took some time to figure out?  
-Tell us about it. What did you enjoy, what was less desirable? Feel
-free to add other items (within the two paragraph limit).
+This programming assignment took me on a path of ups and downs.  I was able to make the hashing object very quickly and easily, but 
+I found myself struggling to implement the hash table.  I was confused on which operations were needed to do the specific tasks 
+that were being asked of us.  But after some deilberation with a few tutors, I was finding myself flying right through the rest 
+of the hash table.  Something that impressed me was how big the hash table could get during runtime.  I guess finally seeing 
+the hash table in action compared to just reading about them really opened my eyes to the size and strength of the hash table.
+Another area that I found myself struggling in was the driver file HashTest.java.  I was not understanding how the prime numbers 
+were supposed to function within the scope of the assignment, but once again, the amazing LAs were able to help me understand
+and implement code that completed the necessary functions.  Another thing that stumped me was the file output, which I have done 
+before in other languages, but I have never had to implement that functionality in java.  I found it to be fairly similar to outputting 
+a file in a language like C, which I now see why so many languages are based off of C.  In conclusion, the programming assignment was 
+again another healthy mind exercise that actually gave me a chance to see a hash table work on my own machine.
 
 ## Compiling and Using
 
-This section should tell the user how to compile your code.  It is
-also appropriate to instruct the user how to use your code. Does your
-program require user input? If so, what does your user need to know
-about it to use it as quickly as possible?
+TO COMPILE:
+javac *.java
+-compiles the HashTest.java, HashObject.java, and HashTable.java class files
 
-## Results 
+TO RUN:
+java HashTest <input type> <load factor> [<debug level>]
+-input types: 1,integer data in hash tables 2,long data in hash tables 3,string data in hasj tables
+-load factor: 0.5-0.99
+-debug level: 0-console output only, 1-console output and linear
+and double dumps
 
-This section presents timing and other results of the experiments that 
-you were asked to perform as part of the project.
-
-## Sources used
-
-If you used any sources outside of the lecture notes, class lab files,
-or text book you need to list them here. If you looked something up on
-stackoverflow.com and fail to cite it in this section it will be
-considered plagiarism and be dealt with accordingly. So be safe CITE!
-
-----------
-This README template is using Markdown. To preview your README output,
-you can copy your file contents to a Markdown editor/previewer such
-as [https://stackedit.io/editor](https://stackedit.io/editor).
