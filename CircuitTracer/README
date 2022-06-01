@@ -1,0 +1,257 @@
+****************
+* Circuit Tracer
+* CS221-3
+* 4/30/2021
+* Xavier Caracter
+**************** 
+
+OVERVIEW:
+ 
+ This program uses a CircuitBoard object to create a maze where the 
+ brute force search algorithm that I have written will connect the starting point
+ to the ending point in the most efficient way(s), and solutions will be output into
+ .dat.out files.
+
+
+INCLUDED FILES:
+
+ * CircuitTracer.java - source file
+ * CircuitBoard.java - source file
+ * Storage.java - helper file (implement stack or queue)
+ * TraceState.java - helper file (TraceState object)
+ * InvalidFileFormatException.java (for exception handling)
+ * OccupiedPositionException.java (for exception handling)
+ * README - this file
+
+
+COMPILING AND RUNNING:
+
+ From the directory containing all source files, compile the
+ driver class (and all dependencies) with the command:
+ $ javac CircuitTracer.java
+
+ Run the compiled class file with the command:
+ $ java CircuitTracer [-s (for Stack) | -q (for Queue)] [-c (for console output) | (-g for GUI output (not supported))] filename
+
+ Console output will give the results after the program finishes.
+ 
+ 
+ 
+ ANALYSIS: 
+ 
+ The choice of storage configuration affects the sequence in which paths are explored
+ due to the fact that stacks are a depth first search, and queues are a breadth first
+ search.  In a stack-based search, the most recently added search state is supposed to 
+ be evaluated next, so that means if there are three states, the third state will be evaluated
+ until that third state is exhausted, then the second state, and so on and so forth.  As for a 
+ queue-based search, the oldest state in memory will be evaluated next.  Going back to our example with
+ those three states, the first will be evaluated first, second second, and so on and so forth.  But after
+ the three states get evaluated the results of those evaluated states will be evaluated in that 
+ same order from state 1's results all the way to state 3's results, adding layer by layer until a solution
+ has been found.  As for the total number of search states?  The choice between a stack or queue
+ should not make a difference as they should end up with the same number of search states.  I also found that
+ that using a stack storage structure always gave me the quickest path to find a solution, and using a queue
+ storage structure, I found that the first solutions found took the shortest paths.  Memory use is affected
+ by the choice in underlying structure because of the fact of how the two structures being used, perform these
+ brute force searches in a different manner (depth vs breadth first). The Big-Oh run time for this search 
+ algorithm is O(n^2) and is reflected by the number of board positions. 
+ 
+
+
+PROGRAM DESIGN AND IMPORTANT CONCEPTS:
+
+This program works in conjunction with the CircuitBoard java class.  It is done so by using the
+CircuitBoard's object and its methods to do the searching.  Once the CircuitTracer has found a 
+path that is of the least amount moves, it saves its best traces (known as Trace States), into storage, where once finished
+the output of the best solutions will be found in the corresponding input file's output file.
+As for the searching, I implemented a brute force search algorithm for this application.
+This was done so by examining all 4 directions in finding the best route to go from the starting point
+to the ending point.
+
+TESTING:
+ 
+ After writing my base code for both the CircuitBoard and CircuitTracer, I found myself
+ at a good position to start testing my program to see if it was working correctly.  I decided to 
+ run the tests using the CircuitTracerTester.class where I based the functionality of my program off
+ of.  My program can handle bad input in the command line 100%.  As for the constructor like call in the
+ CircuitTracerTester, that was one test I did not know how to pass.  I took myself to multiple tutors and 
+ they all came to the same conclusions, they had no idea why my program was behaving in the way that it was doing.
+ I have also included a testing log so those who wish can view the progression of the program.
+ 
+ Testing log:
+ 4/29/21 @07:03pm currently getting %36 on my tester
+ -all of my constructor test are passing
+ -Failing most of my valid tests due to output not matching input
+  except for Vailids 2,5,and 10
+ -Failing invalid tests due to output missing the exception name
+ -Failing Invalid Command line tests due to missing explanation
+  of cmd line args in usage message
+ -Passing GUI tests (GUI not implemented so I designed the program to make
+  a quick and clean exit
+  
+  4/30/21 @10:32am currently still getting %36 on my tester
+ -all of my constructor test are passing
+ -Failing most of my valid tests due to output not matching input
+  except for Vailids 2,5,and 10
+  	-came to find out that my CircuitTracer was only outputting one possible solution
+  	vs all possible solutions for the least amount of moves
+ -Failing invalid tests due to output missing the exception name
+ -Failing Invalid Command line tests due to missing explanation
+  of cmd line args in usage message
+ -Passing GUI tests (GUI not implemented so I designed the program to make
+  a quick and clean exit
+  
+  4/30/21 @10:32am currently now getting %48 on my tester
+ -all of my constructor test are passing
+ -Failing most of my valid tests due to output not matching input
+  except for Vailids 2,5,and 10
+  	-came to find out that my CircuitTracer was only outputting one possible solution
+  	vs all possible solutions for the least amount of moves
+ -Failing invalid tests due to output missing the exception name
+ -No longer failing Invalid Command line tests due to missing explanation
+  of cmd line args in usage message
+  	- updated usage command to provide explanation for cmd line args
+  	- I am now passing all invalid command line args tests
+ -Passing GUI tests (GUI not implemented so I designed the program to make
+  a quick and clean exit
+  
+  4/30/21 @11:36am currently now getting %48 on my tester
+ -all of my constructor test are passing
+ -Failing most of my valid tests due to output not matching input
+  except for Vailids 2,5,and 10
+  	-came to find out that my CircuitTracer was only outputting one possible solution
+  	vs all possible solutions for the least amount of moves
+ -Failing invalid tests due to output missing the exception name
+    -Added exception names (unsuccessful)
+    -Added e.getMessage() to my initial try/catch
+ -No longer failing Invalid Command line tests due to missing explanation
+  of cmd line args in usage message
+  	- updated usage command to provide explanation for cmd line args
+  	- I am now passing all invalid command line args tests
+ -Passing GUI tests (GUI not implemented so I designed the program to make
+  a quick and clean exit
+  
+  4/30/21 @12:23pm currently still getting %48 on my tester
+ -all of my constructor test are passing
+ -Failing most of my valid tests due to output not matching input
+  except for Vailids 2,5,and 10
+  	-came to find out that my CircuitTracer was only outputting one possible solution
+  	vs all possible solutions for the least amount of moves
+ -Failing invalid tests due to output missing the exception name
+    -Added exception names (unsuccessful)
+    -Added e.getMessage() to my initial try/catch (unseccessful)
+ -No longer failing Invalid Command line tests due to missing explanation
+  of cmd line args in usage message
+  	- updated usage command to provide explanation for cmd line args
+  	- I am now passing all invalid command line args tests
+ -Passing GUI tests (GUI not implemented so I designed the program to make
+  a quick and clean exit
+  
+  4/30/21 @12:34pm currently now getting %79.1 on my tester
+ -all of my constructor test are passing
+ -Failing most of my valid tests due to output not matching input
+  except for Vailids 2,5,and 10
+  	-came to find out that my CircuitTracer was only outputting one possible solution
+  	vs all possible solutions for the least amount of moves
+  	-removed newline esc char from my printing method (unsuccessful)
+ -No longer failing invalid tests due to output missing the exception name
+    -Added exception names (unsuccessful)
+    -Added e.getMessage() to my try/catches (unsuccessful)
+    -changed e.getMessage() to printing out e.toString() on my try/catches (successful)
+ -No longer failing Invalid Command line tests due to missing explanation
+  of cmd line args in usage message
+  	- updated usage command to provide explanation for cmd line args
+  	- I am now passing all invalid command line args tests
+ -Passing GUI tests (GUI not implemented so I designed the program to make
+  a quick and clean exit
+  
+    4/30/21 @04:10pm currently now getting %95.3 on my tester
+ -all of my constructor test are passing
+ -Failing only the first case of Valid 1 and Invalid 1
+  	-came to find out that my CircuitTracer was only outputting one possible solution
+  	vs all possible solutions for the least amount of moves
+  	-rewrote my printing section of my circuit tracer to use String vars vs .toString() 
+  	 directly into my Sys.out.println
+  	-removed newline esc char from my printing method (unsuccessful)
+ -No longer failing invalid tests due to output missing the exception name
+    -Added exception names (unsuccessful)
+    -Added e.getMessage() to my try/catches (unsuccessful)
+    -changed e.getMessage() to printing out e.toString() on my try/catches (successful)
+ -No longer failing Invalid Command line tests due to missing explanation
+  of cmd line args in usage message
+  	- updated usage command to provide explanation for cmd line args
+  	- I am now passing all invalid command line args tests
+ -Passing GUI tests (GUI not implemented so I designed the program to make
+  a quick and clean exit
+  
+      4/30/21 @04:22pm currently now getting %97.7 on my tester
+ -all of my constructor test are passing
+ -No longer failing valid file cases, only failing the first case of Valid 1 
+ 	-Invalid 1 still failing
+  	-came to find out that my CircuitTracer was only outputting one possible solution
+  	vs all possible solutions for the least amount of moves
+  	-rewrote my printing section of my circuit tracer to use String vars vs .toString() 
+  	 directly into my Sys.out.println
+  	-removed newline esc char from my printing method (unsuccessful)
+ -No longer failing invalid tests due to output missing the exception name
+    -Added exception names (unsuccessful)
+    -Added e.getMessage() to my try/catches (unsuccessful)
+    -changed e.getMessage() to printing out e.toString() on my try/catches (successful)
+ -No longer failing Invalid Command line tests due to missing explanation
+  of cmd line args in usage message
+  	- updated usage command to provide explanation for cmd line args
+  	- I am now passing all invalid command line args tests
+ -Passing GUI tests (GUI not implemented so I designed the program to make
+  a quick and clean exit
+  
+  4/30/21 @05:47pm currently still getting %97.7 on my tester
+ -all of my constructor test are passing
+ -No longer failing valid file cases, only failing the first case of Valid 1 
+ 	-Invalid 1 still failing
+  	-came to find out that my CircuitTracer was only outputting one possible solution
+  	vs all possible solutions for the least amount of moves
+  	-rewrote my printing section of my circuit tracer to use String vars vs .toString() 
+  	 directly into my Sys.out.println
+  	-removed newline esc char from my printing method (unsuccessful)
+  	-realizing that my constructor call to my CircuitTracer is outputting a file
+  	 that displays nothing, so the tester cannot read and tell that the file is invalid
+ -No longer failing invalid tests due to output missing the exception name
+    -Added exception names (unsuccessful)
+    -Added e.getMessage() to my try/catches (unsuccessful)
+    -changed e.getMessage() to printing out e.toString() on my try/catches (successful)
+ -No longer failing Invalid Command line tests due to missing explanation
+  of cmd line args in usage message
+  	- updated usage command to provide explanation for cmd line args
+  	- I am now passing all invalid command line args tests
+ -Passing GUI tests (GUI not implemented so I designed the program to make
+  a quick and clean exit
+  
+-END OF TESTING LOGS-
+ 
+ 
+ 
+DISCUSSION:
+ 
+ Discuss the issues you encountered during programming (development)
+ and testing. What problems did you have? What did you have to research
+ and learn on your own? What kinds of errors did you get? How did you 
+ fix them?
+ 
+ Throughout development, I found myself running into a multitude of problems.  Everything from
+ trouble with using my scanners, to not understanding how Stacks and Queues work.  But after a 
+ long session of reading and studying, I found myself more in control of what was going on in my 
+ program.  I did not reuse my grid monitor files because those were coded horribly in my opinion, so
+ I wrote out my whole constructor.  As for my searching algorithm, I had done the before you code section of the
+ project and gotten acclimated with how Stacks and Queues would go searching.  Id say after I did that exercise, the
+ flow of my searches became smoother and faster.  So with my CircuitBoard and CircuitTracer written, I went to 
+ tutoring where I received help on a few testing/debugging topics for my program.  The main issues were the
+ fact that my valid outputs were only printing 1 solution to the output files, and the constructor like input for the 
+ CircuitTracer that I never managed work out of my code.  But all in all, passing 97%  of my tests is better than 
+ passing 36% of my tests. 
+ 
+
+ 
+ 
+EXTRA CREDIT:
+N/A
+----------------------------------------------------------------------------

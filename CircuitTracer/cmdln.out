@@ -1,0 +1,4 @@
+Usage: java CircuitTracer [-s | -q] [-c | -g] filename
+	Where in argument 1, -s represents a Stack for storage and -q represents using a Queue for storage
+	In argument 2, -c represents a console output, and -g represents a GUI output (not supported)
+	Argument 3 must be the filename of the file you wish to use
